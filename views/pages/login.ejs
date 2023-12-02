@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./assets/css/login.css" />
+  </head>
+  <body>
+    <div class="login-wrapper">
+      <h1 class="login-title">Login</h1>
+      <form class="login-form" action="/login" method="POST">
+        <div class="form-control">
+          <label class="label-control">Username</label>
+          <input
+            type="text"
+            name="username"
+            class="input-control"
+            id="username"
+            placeholder="Enter username..."
+            value="<%= typeof username !== 'undefined' ? username : '' %>"
+          />
+          <p class="invalid-text">
+            <%= typeof errors != 'undefined' && typeof errors.username !=
+            'undefined' ? errors.username.msg : ''%>
+          </p>
+        </div>
+
+        <div class="form-control">
+          <label class="label-control">Password</label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            class="input-control"
+            placeholder="Enter password"
+          />
+          <p class="invalid-text">
+            <%= typeof errors != 'undefined' && typeof errors.password !=
+            'undefined' ? errors.password.msg : ''%>
+          </p>
+        </div>
+        <button type="submit" class="btn btn-primary submit">Login</button>
+        <div class="redirect">
+          <p>Haven't had an account? <a href="/register">Register</a> here</p>
+        </div>
+      </form>
+    </div>
+
+    <%- include('../partials/messages') %>
+    <script>
+      const form = document.querySelector(".login-form");
+      const username = document.querySelector("#username");
+      const password = document.querySelector("#password");
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        let valid = true;
+
+        if (!cekUsername(username) || !cekPassword(password)) {
+          valid = false;
+        }
+
+        if (valid) {
+          e.target.submit();
+        }
+      });
+
+      function cekUsername(input) {
+        if (input.value == "") {
+          input.parentElement.querySelector(".invalid-text").textContent =
+            "Username is required!";
+          return false;
+        }
+        return true;
+      }
+
+      function cekPassword(input) {
+        if (input.value == "") {
+          input.parentElement.querySelector(".invalid-text").textContent =
+            "Password is required!";
+          return false;
+        }
+        return true;
+      }
+    </script>
+  </body>
+</html>

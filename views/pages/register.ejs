@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register</title>
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./assets/css/login.css" />
+  </head>
+  <body>
+    <div class="login-wrapper">
+      <h1 class="login-title">Register</h1>
+      <%- include('../partials/messages') %>
+      <form class="login-form" action="/register" method="POST">
+        <div class="form-control">
+          <label class="label-control">Name</label>
+          <input
+            type="text"
+            name="name"
+            class="input-control"
+            id="name"
+            placeholder="Enter name..."
+            value="<%= typeof name != 'undefined' ? name : '' %>"
+          />
+          <p class="invalid-text">
+            <%= typeof errors != 'undefined' && typeof errors.name !=
+            'undefined' ? errors.name.msg : ''%>
+          </p>
+        </div>
+        <div class="form-control">
+          <label class="label-control">Username</label>
+          <input
+            type="text"
+            name="username"
+            id="username"
+            class="input-control"
+            placeholder="Enter username..."
+            value="<%= typeof username != 'undefined' ? username : '' %>"
+          />
+          <p class="invalid-text">
+            <%= typeof errors != 'undefined' && typeof errors.username !=
+            'undefined' ? errors.username.msg : ''%>
+          </p>
+        </div>
+        <div class="form-control">
+          <label class="label-control">Email</label>
+          <input
+            type="text"
+            name="email"
+            id="email"
+            class="input-control"
+            placeholder="Enter email..."
+            value="<%= typeof email != 'undefined' ? email : '' %>"
+          />
+          <p class="invalid-text">
+            <%= typeof errors != 'undefined' && typeof errors.email !=
+            'undefined' ? errors.email.msg : ''%>
+          </p>
+        </div>
+        <div class="form-control">
+          <label class="label-control">Password</label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            class="input-control"
+            placeholder="Enter password"
+          />
+          <p class="invalid-text">
+            <%= typeof errors != 'undefined' && typeof errors.password !=
+            'undefined' ? errors.password.msg : ''%>
+          </p>
+        </div>
+        <button type="submit" class="btn btn-primary submit">Register</button>
+        <div class="redirect">
+          <p>Already have an account? <a href="/login">Login</a> here</p>
+        </div>
+      </form>
+    </div>
+  </body>
+  <%- include('../partials/messages') %>
+  <script>
+    const form = document.querySelector(".login-form");
+    const name = document.querySelector("#name");
+    const username = document.querySelector("#username");
+    const email = document.querySelector("#email");
+    const password = document.querySelector("#password");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      let valid = true;
+
+      if (
+        !cekName(name) ||
+        !cekUsername(username) ||
+        !cekEmail(email) ||
+        !cekPassword(password)
+      ) {
+        valid = false;
+      }
+
+      if (valid) {
+        e.target.submit();
+      }
+    });
+
+    function cekName(input) {
+      if (input.value == "") {
+        parentElement.querySelector(".invalid-text").textContent =
+          "Name is required!";
+        return false;
+      }
+      return true;
+    }
+
+    function cekUsername(input) {
+      if (input.value == "") {
+        input.parentElement.querySelector(".invalid-text").textContent =
+          "Username is required!";
+        return false;
+      }
+      return true;
+    }
+
+    function cekEmail(input) {
+      if (input.value == "") {
+        input.parentElement.querySelector(".invalid-text").textContent =
+          "Email is required!";
+        return false;
+      }
+      return true;
+    }
+
+    function cekPassword(input) {
+      if (input.value == "") {
+        input.parentElement.querySelector(".invalid-text").textContent =
+          "Password is required!";
+        return false;
+      }
+      return true;
+    }
+  </script>
+</html>

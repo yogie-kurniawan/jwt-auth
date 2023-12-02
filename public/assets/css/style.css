@@ -1,0 +1,131 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+:root {
+  --primary-color: #068fff;
+  --secondary-color: rgb(135, 199, 252);
+  --bg-color: #fff;
+  --bg-color-1: #eee;
+  --text-white: #fff;
+  --text-color-1: #333;
+  --text-color-2: #3f3f3f;
+  --text-color-3: #747474;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  font-family: "Poppins", sans-serif;
+}
+/* Global */
+.container {
+  max-width: 1200px;
+  padding: 0 20px;
+  margin: 0 auto;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+ul {
+  list-style: none;
+}
+img {
+  max-width: 100%;
+}
+.btn {
+  display: inline-block;
+  padding: 8px 20px;
+  outline: none;
+  border: 1px solid var(--bg-color);
+  background-color: var(--bg-color);
+  color: var(--text-color-2);
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+.btn-sm {
+  display: inline-block;
+  padding: 5px 10px;
+  outline: none;
+  border: 1px solid var(--bg-color);
+  background-color: var(--bg-color);
+  color: var(--text-color-2);
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+.btn-primary {
+  background-color: var(--primary-color);
+  color: var(--text-white);
+  border-color: var(--primary-color);
+}
+.btn-secondary {
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+  border-color: var(--secondary-color);
+}
+.btn-danger {
+  background-color: #d30f0f;
+  color: var(--text-white);
+  border-color: #d30f0f;
+}
+.main-btn {
+  display: inline-block;
+  padding: 8px 20px;
+  outline: none;
+  border: 1px solid var(--primary-color);
+  background-color: var(--primary-color);
+  font-size: 1.1rem;
+  color: var(--text-color-2);
+}
+.section {
+  padding: 6rem 0 4rem;
+}
+.section-title {
+  font-size: 2rem;
+  color: var(--text-color-1);
+  margin-bottom: 3rem;
+  text-align: center;
+  font-weight: 600;
+}
+.row {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+}
+.flex {
+  display: flex;
+}
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.delete-text {
+  font-size: 1rem;
+  color: red;
+}
+.box {
+  padding: 10px;
+  box-shadow: 0 3px 10px rgb(0, 0, 0, 0.3);
+  border-radius: 5px;
+}
+
+/* Home */
+.home {
+  padding: 3rem 0;
+}
+.home h1 {
+  color: var(--primary-color);
+  font-size: 3rem;
+}
+.home a {
+  margin-top: 2rem;
+}

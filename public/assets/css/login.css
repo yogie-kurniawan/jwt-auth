@@ -1,0 +1,170 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+:root {
+  --primary-color: #068fff;
+  --secondary-color: rgb(225, 240, 252);
+  --darker-primary: #0d73c7;
+  --bg-color: #fff;
+  --bg-color-1: #ddd;
+  --text-color: #333;
+  --text-color-1: #fff;
+  --text-color-2: #747474;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  background-color: var(--primary-color);
+  font-family: "Poppins", sans-serif;
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  overflow-x: hidden;
+}
+/* Global */
+.container {
+  max-width: 1200px;
+  padding: 0 20px;
+  margin: 0 auto;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+ul {
+  list-style: none;
+}
+img {
+  max-width: 100%;
+}
+.btn {
+  display: inline-block;
+  padding: 8px 20px;
+  outline: none;
+  border: 1px solid var(--bg-color);
+  background-color: var(--bg-color);
+  color: var(--text-color-1);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s linear;
+}
+.btn-sm {
+  display: inline-block;
+  padding: 5px 10px;
+  outline: none;
+  border: 1px solid var(--bg-color);
+  background-color: var(--bg-color);
+  color: var(--text-color-1);
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+.btn-primary {
+  background-color: var(--primary-color);
+  color: var(--text-color-1);
+  border-color: var(--primary-color);
+}
+.btn-secondary {
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+  border-color: var(--secondary-color);
+}
+.btn-primary:hover {
+  background-color: var(--darker-primary);
+}
+.main-btn {
+  display: inline-block;
+  padding: 8px 20px;
+  outline: none;
+  border: 1px solid var(--primary-color);
+  background-color: var(--primary-color);
+  font-size: 1.1rem;
+  color: var(--text-color-1);
+}
+.section {
+  padding: 6rem 0 4rem;
+}
+.section-title {
+  font-size: 2rem;
+  color: var(--text-color);
+  margin-bottom: 3rem;
+  text-align: center;
+  font-weight: 600;
+}
+.row {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+}
+.flex {
+  display: flex;
+}
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.login-wrapper {
+  max-width: 350px;
+  width: 80%;
+  background-color: var(--bg-color);
+  border-radius: 5px;
+  padding: 35px 25px;
+}
+.login-title {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--text-color);
+}
+.login-wrapper .login-form .form-control {
+  margin-bottom: 0.6rem;
+}
+.login-wrapper .login-form .form-control label {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--text-color);
+  margin-bottom: 0.2rem;
+}
+.login-wrapper .login-form .form-control input {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
+  outline: none;
+  margin-bottom: 0.2rem;
+}
+.login-wrapper .login-form button.submit {
+  width: 100%;
+  display: inline-block;
+  border-radius: 5px;
+  font-weight: 600;
+}
+.login-wrapper .login-form .redirect {
+  margin-top: 1rem;
+}
+.login-wrapper .login-form .redirect p {
+  font-size: 13px;
+  text-align: center;
+}
+.login-wrapper .login-form .redirect p a {
+  color: var(--primary-color);
+}
+.login-wrapper .login-form .redirect p a:hover {
+  color: var(--primary-color);
+  text-decoration: underline;
+}
+.login-form .invalid-text {
+  font-size: 0.7rem;
+  color: red;
+}
