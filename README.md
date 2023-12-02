@@ -3,7 +3,7 @@ Authentication with JWT, Node.js and MongoDB
 
 How to run this project?
 1. Run "npm i" to install all required packages
-2. create an .env file, and define these variables:
+2. Create an env file with ".env" extension (without a name) and define these variables:
     PORT=3000
     JWT_SECRET=yoursecret
     JWT_LIFETIME=1d
@@ -11,4 +11,4 @@ How to run this project?
     SALT_ROUNDS=10
     SESSION_SECRET=yoursecret
 
-3. run "npm start"
+3. Run "npm start"
