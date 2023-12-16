@@ -90,18 +90,19 @@ const postLogin = async (req, res) => {
       req.session.error = "Password is incorrect!";
       return res.redirect("/login");
     }
+    let userData = {
+      id: user._id,
+      username: user.username,
+    };
+
     const token =
       "Bearer " +
-      jwt.sign(
-        {
-          id: user._id,
-          username: user.username,
-        },
-        process.env.JWT_SECRET,
-        {
-          expiresIn: process.env.JWT_LIFETIME,
-        }
-      );
+      jwt.sign(userData, process.env.JWT_SECRET, {
+        expiresIn: process.env.JWT_LIFETIME,
+      });
+
+    req.session.user = userData;
+
     res.cookie("token", token, {
       maxAge: 24 * 60 * 60 * 1000,
       secure: true,
