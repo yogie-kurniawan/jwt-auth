@@ -51,14 +51,16 @@ const postRegister = async (req, res) => {
       password: hashedPassword,
     });
 
-    const save = await newUser.save();
-    if (save) {
+    const savedUser = await newUser.save();
+    if (savedUser) {
       req.session.success = "Registration successful!";
       return res.redirect("/login");
     } else {
       req.session.error = "Failed to register!";
     }
-  } catch (err) {}
+  } catch (err) {
+    req.session.error = "Failed to register!";
+  }
 };
 
 const getLogin = (req, res) => {
