@@ -19,14 +19,9 @@ const postRegister = async (req, res) => {
     errors.username = { msg: "Username is required!" };
   }
   if (!email) {
-    errors.email = { msg: "Email is required!" };
-  }
-  if (email) {
-    const regexCode =
-      '/^(([^<>()[]\\.,;:s@"]+(.[^<>()[]\\.,;:s@"]+)*)|(".+"))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$/';
-    if (!username.match(regexCode)) {
-      errors.username = { msg: "Email is not valid" };
-    }
+    errors.email = "Email is required!";
+  } else if (!email.match(/^\S+@\S+\.\S+$/)) {
+    errors.email = "Email is not valid!";
   }
   if (!password) {
     errors.password = { msg: "Password is required!" };
@@ -50,16 +45,18 @@ const postRegister = async (req, res) => {
       email,
       password: hashedPassword,
     });
-
     const savedUser = await newUser.save();
     if (savedUser) {
       req.session.success = "Registration successful!";
       return res.redirect("/login");
     } else {
       req.session.error = "Failed to register!";
+      return res.redirect("/register");
     }
   } catch (err) {
+    console.log(err);
     req.session.error = "Failed to register!";
+    return res.redirect("/register");
   }
 };
 
