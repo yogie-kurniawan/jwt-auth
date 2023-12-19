@@ -1,5 +1,11 @@
 const getHome = (req, res) => {
-  return res.render("pages/index");
+  res.render("pages/index", {
+    error: req.session.error,
+    success: req.session.success,
+  });
+  req.session.error = null;
+  req.session.success = null;
+  return;
 };
 
 module.exports = { getHome };

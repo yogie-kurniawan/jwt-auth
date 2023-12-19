@@ -4,24 +4,43 @@ const User = require("../models/User");
 const saltRounds = parseInt(process.env.SALT_ROUNDS);
 
 const getRegister = (req, res) => {
-  return res.render("pages/register");
+  res.render("pages/register", { error: req.session.error });
+  req.session.destroy();
+  return;
 };
 
 const postRegister = async (req, res) => {
   const { name, username, password, email } = req.body;
   let errors = {};
 
-  // Validation
+  try {
+    let valueExists = async (field, value) => {
+      return await User.findOne({ field: value });
+    };
+
+    if (await valueExists("username", username)) {
+      errors.username = { msg: "Username already exists!" };
+    }
+    if (await valueExists("email", email)) {
+      errors.email = { msg: "Email already exists!" };
+    }
+  } catch (error) {
+    console.log(error);
+    req.session.error = "Failed to register!";
+    return res.redirect("/register");
+  }
+
   if (!name) {
+    // Validation
     errors.name = { msg: "Name is required!" };
   }
   if (!username) {
     errors.username = { msg: "Username is required!" };
   }
   if (!email) {
-    errors.email = "Email is required!";
+    errors.email = { msg: "Email is required!" };
   } else if (!email.match(/^\S+@\S+\.\S+$/)) {
-    errors.email = "Email is not valid!";
+    errors.email = { msg: "Email is not valid!" };
   }
   if (!password) {
     errors.password = { msg: "Password is required!" };
@@ -46,6 +65,7 @@ const postRegister = async (req, res) => {
       password: hashedPassword,
     });
     const savedUser = await newUser.save();
+
     if (savedUser) {
       req.session.success = "Registration successful!";
       return res.redirect("/login");
@@ -61,7 +81,10 @@ const postRegister = async (req, res) => {
 };
 
 const getLogin = (req, res) => {
-  return res.render("pages/login");
+  return res.render("pages/login", {
+    error: req.session.error,
+    success: req.session.success,
+  });
 };
 
 const postLogin = async (req, res) => {
@@ -110,6 +133,7 @@ const postLogin = async (req, res) => {
     req.session.success = "Login successful!";
     return res.redirect("/");
   } catch (error) {
+    console.log(error);
     req.session.error = "There was something wrong, try again!";
     return res.redirect("/login");
   }

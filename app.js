@@ -20,13 +20,13 @@ app.use(cookie());
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
   })
 );
 // middleware to make 'user' available to all templates
 app.use(function (req, res, next) {
   res.locals.user = req.session.user;
-  res.locals.success = req.session.success;
-  res.locals.error = req.session.error;
   next();
 });
 // Parse JSON
