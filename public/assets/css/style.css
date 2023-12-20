@@ -6,7 +6,7 @@
 }
 :root {
   --primary-color: #068fff;
-  --secondary-color: rgb(135, 199, 252);
+  --secondary-color: #87c7fc;
   --bg-color: #fff;
   --bg-color-1: #eee;
   --text-white: #fff;
@@ -123,7 +123,7 @@ img {
   padding: 3rem 0;
 }
 .home h1 {
-  color: var(--primary-color);
+  color: var(--text-color-1);
   font-size: 3rem;
 }
 .home a {

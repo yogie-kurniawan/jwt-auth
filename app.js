@@ -27,6 +27,7 @@ app.use(
 // middleware to make 'user' available to all templates
 app.use(function (req, res, next) {
   res.locals.user = req.session.user;
+  console.log(res.locals.user);
   next();
 });
 // Parse JSON
