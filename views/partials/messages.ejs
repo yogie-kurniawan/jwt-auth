@@ -1,10 +1,10 @@
 <script>
-  $error = "<%= typeof error != 'undefined' ? error : null %>";
-  if ($error) {
-    alert($error);
+  let error = "<%= typeof error != 'undefined' ? error : null %>";
+  if (error) {
+    alert(error);
   }
-  $success = "<%= typeof success != 'undefined' ? success : null %>";
-  if ($success) {
-    alert($success);
+  let success = "<%= typeof success != 'undefined' ? success : null %>";
+  if (success) {
+    alert(success);
   }
 </script>

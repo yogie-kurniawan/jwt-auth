@@ -5,30 +5,13 @@ const saltRounds = parseInt(process.env.SALT_ROUNDS);
 
 const getRegister = (req, res) => {
   res.render("pages/register", { error: req.session.error });
-  req.session.destroy();
+  req.session.error = null;
   return;
 };
 
 const postRegister = async (req, res) => {
   const { name, username, password, email } = req.body;
   let errors = {};
-
-  try {
-    let valueExists = async (field, value) => {
-      return await User.findOne({ field: value });
-    };
-
-    if (await valueExists("username", username)) {
-      errors.username = { msg: "Username already exists!" };
-    }
-    if (await valueExists("email", email)) {
-      errors.email = { msg: "Email already exists!" };
-    }
-  } catch (error) {
-    console.log(error);
-    req.session.error = "Failed to register!";
-    return res.redirect("/register");
-  }
 
   if (!name) {
     // Validation
@@ -46,13 +29,31 @@ const postRegister = async (req, res) => {
     errors.password = { msg: "Password is required!" };
   }
 
+  try {
+    let valueExists = async (field, value) => {
+      return await User.findOne({ [field]: value });
+    };
+
+    if (await valueExists("username", username)) {
+      errors.username = { msg: "Username already exists!" };
+    }
+    if (await valueExists("email", email)) {
+      errors.email = { msg: "Email already exists!" };
+    }
+  } catch (error) {
+    console.log(error);
+    req.flash("error", "Failed to register!");
+    return res.redirect("/register");
+  }
+
   if (Object.keys(errors).length > 0) {
-    return res.render("pages/register", {
+    res.render("pages/register", {
       errors,
       name,
       username,
       email,
       password,
+      error: req.session.error,
     });
   }
 
@@ -66,13 +67,8 @@ const postRegister = async (req, res) => {
     });
     const savedUser = await newUser.save();
 
-    if (savedUser) {
-      req.session.success = "Registration successful!";
-      return res.redirect("/login");
-    } else {
-      req.session.error = "Failed to register!";
-      return res.redirect("/register");
-    }
+    req.session.success = "Registration successful!";
+    return res.redirect("/login");
   } catch (err) {
     console.log(err);
     req.session.error = "Failed to register!";

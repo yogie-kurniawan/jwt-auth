@@ -1,8 +1,8 @@
 <%- include('../partials/header') %>
 <section class="home container">
   <h1>
-    Welcome, <%= user !== 'undefined' && user.username ? user.username :
-    'User'%>
+    Welcome, <%= user !== 'undefined' && user.username !== 'undefined' ?
+    user.username : 'User'%>
   </h1>
   <a href="/logout" class="btn btn-danger">Logout</a>
 </section>
